@@ -1,0 +1,2 @@
+isPalindrome :: [Char] -> Bool
+isPalindrome
