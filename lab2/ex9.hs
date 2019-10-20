@@ -21,3 +21,26 @@ insert x (y:ys) = if x < y
 iSort :: [Int] -> [Int]
 iSort [] = []
 iSort (x:xs) = insert x (iSort xs)
+
+concat' :: [[a]] -> [a]
+concat' [[]] = []
+concat' [] = []
+concat' (xs:ys) = xs ++ concat'(ys)
+
+concat'' :: [[a]] -> [a]
+concat'' xss = [x | xs <- xss, x <- xs]
+
+isSorted :: [Int] -> Bool
+isSorted [] = True
+isSorted [x] = True
+isSorted (x:y:xs) = if x <= y
+                    then isSorted(y:xs)
+                    else False
+
+reverse' :: [a] -> [a]
+reverse' [] = []
+reverse' (x:xs) = reverse'(xs) ++ [x]
+
+zip' :: [a] -> [b] -> [(a,b)]
+zip' (x:xs) (y:ys) = (x,y) : zip' xs ys
+zip' _  _   = []
