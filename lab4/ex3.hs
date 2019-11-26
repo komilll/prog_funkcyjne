@@ -35,3 +35,14 @@ flattenBT EmptyBT = []
 flattenBT (NodeBT n lt rt) = flattenBT lt ++ [n] ++ flattenBT rt
 
 mapBT :: (a -> b) -> BinTree a -> BinTree b
+mapBT f EmptyBT = EmptyBT
+mapBT f (NodeBT n lt rt) = NodeBT (f n) (mapBT f lt) (mapBT f rt)
+
+insert :: Ord a => a -> BinTree a -> BinTree a
+insert x EmptyBT = NodeBT x EmptyBT EmptyBT
+insert x (NodeBT n lt rt)
+            | n == x = NodeBT n lt rt
+            | n < x = NodeBT n lt (insert x rt)
+            | n > x = NodeBT n (insert x lt) rt
+
+list2BST :: Orda a => [a] -> BinTree a
