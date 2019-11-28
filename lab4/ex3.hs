@@ -74,15 +74,25 @@ elemOf val t = elemOfCon val t
                                             | n == val = True
                                             | otherwise = (elemOfCon val lt) || (elemOfCon val rt)
 
--- minElemOf :: Ord a => a -> BinTree a -> a
--- minElemOf val EmptyBT = val
--- minElemOf val (NodeBT n lt rt) =
---     let leftMin = minElemOf val lt
---         rightMin = minElemOf val rt
---     in if (leftMin < rightMin)
---         then
---             leftMin
---         else 
---             rightMin
+minElemOf :: Ord a => a -> BinTree a -> a
+minElemOf x EmptyBT = x
+minElemOf x (NodeBT n lt rt) = min (leftVal n lt) (rightVal n rt)
+                        where 
+                            leftVal curVal EmptyBT = curVal
+                            leftVal curVal (NodeBT n lt rt) = minElemOf (min curVal n) lt
+                            rightVal curVal EmptyBT = curVal
+                            rightVal curVal (NodeBT n lt rt) = minElemOf (min curVal n) rt
+
+maxElemOf :: Ord a => a -> BinTree a -> a
+maxElemOf x EmptyBT = x
+maxElemOf x (NodeBT n lt rt) = max (leftVal n lt) (rightVal n rt)
+                        where 
+                            leftVal curVal EmptyBT = curVal
+                            leftVal curVal (NodeBT n lt rt) = maxElemOf (max curVal n) lt
+                            rightVal curVal EmptyBT = curVal
+                            rightVal curVal (NodeBT n lt rt) = maxElemOf (max curVal n) rt
+
+-- foldBinTree :: (a -> BinTree a -> BinTree a -> BinTree a) -> (BinTree a) -> BinTree a -> BinTree a
+-- foldBinTree 
 
 --3
